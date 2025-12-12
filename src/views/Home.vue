@@ -2,8 +2,8 @@
   <div class="home">
     <!-- Hero Section -->
     <section class="relative h-screen flex items-center justify-center overflow-hidden">
-      <!-- Background Video -->
-      <div class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
+      <!-- Background Video (Desktop only) -->
+      <div v-if="!isMobile" class="absolute inset-0 w-full h-full pointer-events-none overflow-hidden">
         <div class="absolute inset-0 scale-[1.2]">
           <iframe
             v-if="heroVideoId"
@@ -15,6 +15,14 @@
           ></iframe>
         </div>
       </div>
+      
+      <!-- Background Image (Mobile fallback) -->
+      <div 
+        v-if="isMobile"
+        class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('https://static.wixstatic.com/media/04db04_29e395577290420e8aa9e11aaafc0b0d~mv2.png/v1/fill/w_1920,h_1080,al_c,q_90,enc_avif,quality_auto/04db04_29e395577290420e8aa9e11aaafc0b0d~mv2.png')"
+      ></div>
+      
       <div class="absolute inset-0 bg-black opacity-50 pointer-events-none"></div>
       
       <div class="text-center text-white z-10 px-4">
@@ -164,7 +172,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useSEO } from '../composables/useSEO'
 import { useStructuredData } from '../composables/useStructuredData'
 import MusicPlayer from '../components/MusicPlayer.vue'
@@ -177,7 +185,18 @@ const heroVideoId = siteConfig.heroVideoId
 const recentVideos = siteConfig.videos
 const musicLinks = siteConfig.music
 
+// Detect mobile device to show static image instead of video
+const isMobile = ref(false)
+
 onMounted(() => {
+  // Check if device is mobile (screen width < 768px or touch device)
+  isMobile.value = window.innerWidth < 768 || ('ontouchstart' in window)
+  
+  // Update on resize
+  window.addEventListener('resize', () => {
+    isMobile.value = window.innerWidth < 768
+  })
+  
   useSEO({
     title: 'Zac Lawless - Official Website | Music, Events & More',
     description: 'Official website of Zac Lawless. Listen to the latest music, check out upcoming shows, and stay connected.',
