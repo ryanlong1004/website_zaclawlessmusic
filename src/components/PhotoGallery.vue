@@ -79,7 +79,7 @@
 </template>
 
 <script setup>
-
+import { ref } from 'vue'
 import SocialLinks from './SocialLinks.vue'
 
 const props = defineProps({

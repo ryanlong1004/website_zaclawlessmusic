@@ -170,29 +170,12 @@ import { useStructuredData } from '../composables/useStructuredData'
 import MusicPlayer from '../components/MusicPlayer.vue'
 import SocialLinks from '../components/SocialLinks.vue'
 
-// YouTube video ID for hero background
-// Video: https://www.youtube.com/watch?v=NhG7fyEZw-U
-const heroVideoId = 'NhG7fyEZw-U'
+import { siteConfig } from '../config'
 
-// Recent performance videos (in chronological order, newest first)
-// To add more videos: Go to YouTube channel, copy video IDs from URLs
-const recentVideos = [
-  {
-    id: 'NhG7fyEZw-U',
-    title: 'Live at Shawnee Craft Brewery - March 2024'
-  }
-  // Add more video IDs here as they become available:
-  // {
-  //   id: 'ANOTHER_VIDEO_ID',
-  //   title: 'Performance Title'
-  // }
-]
-
-const musicLinks = {
-  spotify: '',
-  appleMusic: '',
-  soundcloud: ''
-}
+// Use hero video and recent videos from config
+const heroVideoId = siteConfig.heroVideoId
+const recentVideos = siteConfig.videos
+const musicLinks = siteConfig.music
 
 onMounted(() => {
   useSEO({

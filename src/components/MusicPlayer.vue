@@ -69,7 +69,7 @@
 import { computed } from 'vue'
 import SocialLinks from './SocialLinks.vue'
 
-defineProps({
+const props = defineProps({
   title: {
     type: String,
     default: 'Latest Music'
