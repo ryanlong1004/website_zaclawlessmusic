@@ -1,0 +1,3 @@
+<!-- Placeholder - favicon.ico can be generated using online tools or design software -->
+<!-- Visit https://favicon.io/ to generate a proper favicon.ico file -->
+<!-- For now, browsers will use favicon.svg -->
